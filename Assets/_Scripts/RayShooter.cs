@@ -20,14 +20,27 @@ public class RayShooter : MonoBehaviour
         {
             Vector3 point = new Vector3(cam.pixelWidth/2, cam.pixelHeight/2, 0);
 
-            Ray ray = cam.ScreenPointToRay(point);
-            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(point);            
+            RaycastHit hit;            
 
-            if(Physics.Raycast(ray, out hit))
-            {
-                StartCoroutine(SphereIndicator(hit.point));
+            if (Physics.Raycast(ray, out hit))            
+            {                
+                GameObject hitObject = hit.transform.gameObject;
+                ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
+                
+                if(target != null)
+                {
+                    target.ReactToHit();
+                    //Debug.Log("Target hit");
+                }
+                else
+                {
+                    StartCoroutine(SphereIndicator(hit.point));
+                }                              
             }
-        }
+        } 
+    Debug.DrawRay(transform.position, transform.forward * 100, Color.red);
+
     }
 
     private IEnumerator SphereIndicator(Vector3 pos)
@@ -45,6 +58,6 @@ public class RayShooter : MonoBehaviour
         int size = 12;
         float posX = cam.pixelWidth / 2 - size / 4;
         float posY = cam.pixelHeight / 2 - size / 2;
-        GUI.Label(new Rect(posX, posY, size, size), "*");
+        GUI.Label(new Rect(posX, posY, size, size), "*");        
     }
 }

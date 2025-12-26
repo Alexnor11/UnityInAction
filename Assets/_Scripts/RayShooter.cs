@@ -39,7 +39,7 @@ public class RayShooter : MonoBehaviour
                 }                              
             }
         } 
-    Debug.DrawRay(transform.position, transform.forward * 100, Color.red);
+    Debug.DrawRay(transform.position, transform.forward * 30, Color.blue);
 
     }
 

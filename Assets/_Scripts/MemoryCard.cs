@@ -5,10 +5,14 @@ using UnityEngine;
 public class MemoryCard : MonoBehaviour
 {
     [SerializeField] GameObject cardBlack;
-    [SerializeField] Sprite image;
+    [SerializeField] SceneController controller;
 
-    private void Start()
+    private int _id;
+    public int Id { get { return _id; } }
+
+    public void SerCard(int id, Sprite image)
     {
+        _id = id;
         GetComponent<SpriteRenderer>().sprite = image;
     }
 

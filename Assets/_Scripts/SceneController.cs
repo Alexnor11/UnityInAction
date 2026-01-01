@@ -9,9 +9,16 @@ public class SceneController : MonoBehaviour
     public const float offsetX = 2f;
     public const float offsetY = 2.5f;
 
-    
     [SerializeField] MemoryCard originalCard;
     [SerializeField] Sprite[] images;
+
+    private MemoryCard firstRevealed;
+    private MemoryCard secondRevealed;
+
+    public bool canReveral
+    {
+        get { return secondRevealed == null; }
+    }
 
     private void Start()
     {
@@ -35,7 +42,7 @@ public class SceneController : MonoBehaviour
                 }
                 int index = j * greidCols + i;
                 int id = numbers[index];
-                originalCard.SerCard(id, images[id]);
+                card.SerCard(id, images[id]);
 
                 float posX = (offsetX * i) + startPos.x;
                 float posY = (offsetY * j) + startPos.y;
@@ -55,5 +62,11 @@ public class SceneController : MonoBehaviour
             newArray[i] = newArray[r];
             newArray[r] = tmp;
         }
-        return newArray;    }
+        return newArray;    
+    }
+
+    public void CardRevealed(MemoryCard card)
+    {
+
+    }
 }

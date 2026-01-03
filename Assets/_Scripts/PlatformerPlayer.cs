@@ -8,11 +8,13 @@ public class PlatformerPlayer : MonoBehaviour
     public float jumpForce = 12.0f;
 
     private Rigidbody2D body;
+    private BoxCollider2D box;
     private Animator anim;
 
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
     }
 
@@ -22,7 +24,20 @@ public class PlatformerPlayer : MonoBehaviour
         Vector2 movement = new Vector2(deltaX, body.velocity.y);
         body.velocity = movement;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        Vector3 max = box.bounds.max;
+        Vector3 min = box.bounds.min;
+        Vector2 corner1 = new Vector2(max.x, min.y - .1f);
+        Vector2 corner2 = new Vector2(min.x, min.y - .2f);
+        Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
+
+        bool grounded = false;
+        
+        if(hit != null)
+        {
+            grounded = true;
+        }
+        
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }

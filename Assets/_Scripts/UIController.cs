@@ -36,10 +36,5 @@ public class UIController : MonoBehaviour
     public void OnOpenSettings()
     {
         settingsPopup.Open();
-    }
-
-    public void OnPointerDown()
-    {
-        Debug.Log("pointer down");
-    }
+    }  
 }

@@ -32,6 +32,7 @@ public class RayShooter : MonoBehaviour
                 if(target != null)
                 {
                     target.ReactToHit();
+                    Messenger.Broadcast(GameEvent.ENEMY_HIT);
                     //Debug.Log("Target hit");
                 }
                 else

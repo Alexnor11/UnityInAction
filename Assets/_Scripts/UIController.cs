@@ -8,18 +8,28 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text scoreLabel;
     [SerializeField] SettingsPopup settingsPopup;
 
+    private int score;
+
+    private void OnEnable()
+    {
+        Messenger.AddListener(GameEvent.ENEMY_HIT, OnEnemyHit);
+    }
+    private void OnDisable()
+    {
+        Messenger.RemoveListener(GameEvent.ENEMY_HIT, OnEnemyHit);
+    }
+
     private void Start()
     {
+        score = 0;
+        scoreLabel.text = score.ToString();
+        
         settingsPopup.Close();
     }
 
-    private void Update()
+    private void OnEnemyHit()
     {
-        scoreLabel.text = Time.realtimeSinceStartup.ToString();
-    }
-
-    public void OnOpenSettings()
-    {
-        settingsPopup.Open();
+        score += 1;
+        scoreLabel.text = score.ToString();
     }
 }

@@ -843,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841727809}
   - component: {fileID: 841727810}
+  - component: {fileID: 841727811}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -878,6 +879,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 570177586672892592, guid: 2e0eff909da82ea448d8330bc3b2c753, type: 3}
+--- !u!114 &841727811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841727808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3618ba45783cf1842922466b0450d178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreLabel: {fileID: 1396630887}
 --- !u!1 &885781917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1412,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1207925321}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 841727811}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: OnOpenSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1207925321
 MonoBehaviour:
   m_ObjectHideFlags: 0

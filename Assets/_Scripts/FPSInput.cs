@@ -8,10 +8,22 @@ using UnityEngine;
 
 public class FPSInput : MonoBehaviour
 {
+    public const float baseSpeed = 6f;
+
     public float speed = 6.0f;
     public float gravity = -9.8f;
 
     private CharacterController charController;
+
+    void OnEnable()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    private void OnDisable()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
 
     private void Start()
     {
@@ -31,5 +43,9 @@ public class FPSInput : MonoBehaviour
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
         charController.Move(movement);
+    }
+    private void OnSpeedChanged(float value)
+    {
+        speed = baseSpeed * value;
     }
 }

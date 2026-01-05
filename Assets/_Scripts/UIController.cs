@@ -32,4 +32,14 @@ public class UIController : MonoBehaviour
         score += 1;
         scoreLabel.text = score.ToString();
     }
+
+    public void OnOpenSettings()
+    {
+        settingsPopup.Open();
+    }
+
+    public void OnPointerDown()
+    {
+        Debug.Log("pointer down");
+    }
 }

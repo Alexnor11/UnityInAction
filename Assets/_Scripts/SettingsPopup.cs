@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SettingsPopup : MonoBehaviour
 {
-    [SerializeField] Slider speedSlider;
-
+    [SerializeField] Slider speedSlider;    
+    
     private void Start()
     {
         speedSlider.value = PlayerPrefs.GetFloat("speed", 1);
@@ -28,6 +28,6 @@ public class SettingsPopup : MonoBehaviour
 
     public void OnSpeedValue(float speed)
     {
-        Debug.Log($"Speed:  {speed}");
+        Messenger<float>.Broadcast(GameEvent.SPEED_CHANGED, speed);
     }
 }

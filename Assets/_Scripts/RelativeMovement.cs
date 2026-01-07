@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -17,16 +18,18 @@ public class RelativeMovement : MonoBehaviour
 
     private CharacterController charController;
     private float vertSpeed;
+    private ControllerColliderHit contact;
 
     private void Start()
     {
         vertSpeed = minFall;
         charController = GetComponent<CharacterController>();
     }
+    
 
     private void Update()
     {
-        Vector3 movment = Vector3.zero;
+        Vector3 movement = Vector3.zero;
 
         float horInput = Input.GetAxis("Horizontal");
         float vertInput = Input.GetAxis("Vertical");
@@ -35,16 +38,25 @@ public class RelativeMovement : MonoBehaviour
         {
             Vector3 right = target.right;
             Vector3 forward = Vector3.Cross(right, Vector3.up);
-            movment = (right * horInput) + (forward * vertInput);
+            movement = (right * horInput) + (forward * vertInput);
 
-            movment *= moveSpeed;
-            movment = Vector3.ClampMagnitude(movment, moveSpeed);
+            movement *= moveSpeed;
+            movement = Vector3.ClampMagnitude(movement, moveSpeed);
 
-            Quaternion direction = Quaternion.LookRotation(movment);
+            Quaternion direction = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Lerp(transform.rotation, 
                 direction, rotSpeed * Time.deltaTime);           
             }
-        if (charController.isGrounded)
+
+        bool hitGround = false;
+        RaycastHit hit;
+        if(vertSpeed < 0 && Physics.Raycast(transform.position, Vector3.down, out hit))
+        {
+            float check = (charController.height + charController.radius) / 1.9f;
+            hitGround = hit.distance <= check;
+        }
+
+        if (hitGround)
         {
             if (Input.GetButtonDown("Jump"))
             {
@@ -62,10 +74,27 @@ public class RelativeMovement : MonoBehaviour
             {
                 vertSpeed = terminalVelocity;
             }
-        }
-        movment.y = vertSpeed;
 
-        movment *= Time.deltaTime;
-        charController.Move(movment);
+            if (charController.isGrounded)
+            {
+                if(Vector3.Dot(movement, contact.normal) < 0)
+                {
+                    movement = contact.normal * moveSpeed;
+                }
+                else
+                {
+                    movement += contact.normal * moveSpeed;
+                }
+            }
+        }
+        movement.y = vertSpeed;
+
+        movement *= Time.deltaTime;
+        charController.Move(movement);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        contact = hit;
     }
 }

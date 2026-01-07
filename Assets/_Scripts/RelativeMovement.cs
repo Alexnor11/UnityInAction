@@ -10,11 +10,17 @@ public class RelativeMovement : MonoBehaviour
 
     public float rotSpeed = 15.0f;
     public float moveSpeed = 6f;
+    public float jumpSpeed = 15f;
+    public float gravity = -9.8f;
+    public float terminalVelocity = -10f;
+    public float minFall = -1.5f;
 
     private CharacterController charController;
+    private float vertSpeed;
 
     private void Start()
     {
+        vertSpeed = minFall;
         charController = GetComponent<CharacterController>();
     }
 
@@ -36,8 +42,28 @@ public class RelativeMovement : MonoBehaviour
 
             Quaternion direction = Quaternion.LookRotation(movment);
             transform.rotation = Quaternion.Lerp(transform.rotation, 
-                direction, rotSpeed * Time.deltaTime);
+                direction, rotSpeed * Time.deltaTime);           
+            }
+        if (charController.isGrounded)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                vertSpeed = jumpSpeed;
+            }
+            else
+            {
+                vertSpeed = minFall;
+            }
         }
+        else
+        {
+            vertSpeed += gravity * 5 * Time.deltaTime;
+            if (vertSpeed < terminalVelocity)
+            {
+                vertSpeed = terminalVelocity;
+            }
+        }
+        movment.y = vertSpeed;
 
         movment *= Time.deltaTime;
         charController.Move(movment);

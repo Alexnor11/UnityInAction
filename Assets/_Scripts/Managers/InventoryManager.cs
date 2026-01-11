@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status {  get; private set; }
+    public string equippedItem { get; private set; }
 
     private Dictionary<string, int> items;
 
@@ -36,6 +37,19 @@ public class InventoryManager : MonoBehaviour, IGameManager
             items[name] = 1;
         }
         DisplayItems();
+    }
+
+    public bool EquipItem(string name)
+    {
+        if(items.ContainsKey(name) && equippedItem != name)
+        {
+            equippedItem = name;
+            Debug.Log($"Equipped {name}");
+            return true;
+        }
+        equippedItem = null;
+        Debug.Log("Unequipped");
+        return false;
     }
 
     public List<string> GetItemList()

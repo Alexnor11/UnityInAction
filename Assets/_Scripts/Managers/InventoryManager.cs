@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour, IGameManager
@@ -65,5 +66,24 @@ public class InventoryManager : MonoBehaviour, IGameManager
             return items[name];
         }
         return 0;
+    }
+
+    public bool ConsumeItem(string name)
+    {
+        if (items.ContainsKey(name))
+        {
+            items[name]--;
+        }
+        if (items[name] == 0)
+        {
+            items.Remove(name);
+        }
+        else
+        {
+            Debug.Log($"Connot consume {name}");
+            return false;
+        }
+        DisplayItems();
+        return true;
     }
 }

@@ -8,17 +8,25 @@ public class WeatherController : MonoBehaviour
     [SerializeField] Light sun;
 
     private float fullIntensity;
-    private float cloudValue = 0f;
 
-    private void Start()
+    void OnEnable()
+    {
+        Messenger.AddListener(GameEvent.WEATHER_UPDATED, OnWeatherUpdated);
+    }
+    void OnDisable()
+    {
+        Messenger.RemoveListener(GameEvent.WEATHER_UPDATED, OnWeatherUpdated);
+    }
+
+    // Use this for initialization
+    void Start()
     {
         fullIntensity = sun.intensity;
     }
 
-    private void Update()
+    private void OnWeatherUpdated()
     {
-        SetOvercast(cloudValue);
-        cloudValue += .005f;
+        SetOvercast(Managers.Weather.cloudValue);
     }
 
     private void SetOvercast(float value)

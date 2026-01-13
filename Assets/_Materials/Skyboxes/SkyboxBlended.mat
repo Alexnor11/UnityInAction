@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TropicalSunnyDay
+  m_Name: SkyboxBlended
   m_Shader: {fileID: 4800000, guid: 65a305b60194cd845bcbd29792445bbb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -73,7 +73,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Blend: 1.7049986
+    - _Blend: 0.8099994
     - _Exposure: 0.9
     - _Rotation: 0
     m_Colors:

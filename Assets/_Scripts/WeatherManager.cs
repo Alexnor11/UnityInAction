@@ -19,7 +19,7 @@ public class WeatherManager : MonoBehaviour, IGameManager
 
         network = service;
         //StartCoroutine(network.GetWeatherXML(OnXMLDataLoaded));
-        StartCoroutine(network.GetWeatherJSON(OnJSONDataLoaded));
+        //StartCoroutine(network.GetWeatherJSON(OnJSONDataLoaded));
 
         status = ManagerStatus.Initializing;
     }
@@ -41,18 +41,18 @@ public class WeatherManager : MonoBehaviour, IGameManager
     //    status = ManagerStatus.Started;
     //}
 
-    public void OnJSONDataLoaded(string data)
-    {
-        JObject root = JObject.Parse(data);
+    //public void OnJSONDataLoaded(string data)
+    //{
+    //    JObject root = JObject.Parse(data);
 
-         //look for "clouds":{"all":40}
-        JToken clouds = root["clouds"];
-        cloudValue = (float)clouds["all"] / 100f;
-        Debug.Log($"Value: {cloudValue}");
+    //     //look for "clouds":{"all":40}
+    //    JToken clouds = root["clouds"];
+    //    cloudValue = (float)clouds["all"] / 100f;
+    //    Debug.Log($"Value: {cloudValue}");
 
-        Messenger.Broadcast(GameEvent.WEATHER_UPDATED);
+    //    Messenger.Broadcast(GameEvent.WEATHER_UPDATED);
 
-        status = ManagerStatus.Started;
+    //    status = ManagerStatus.Started;
     }
 
     //public void LogWeather(string name)
@@ -63,4 +63,4 @@ public class WeatherManager : MonoBehaviour, IGameManager
     //{
     //    Debug.Log(response);
     //}
-}
+//}

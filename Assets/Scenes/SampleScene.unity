@@ -3101,7 +3101,7 @@ GameObject:
   - component: {fileID: 1404678490}
   - component: {fileID: 1404678489}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Toggle Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2688,26 +2688,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6395690941033650758, guid: 5fad9579fd8a7d94ab6ac3ec0271667b, type: 3}
   m_PrefabInstance: {fileID: 1026191883}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2075692499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132147674561093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e73efd12732c2e40bcfb5a81a3dd349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 963194228}
-  rotSpeed: 15
-  moveSpeed: 6
-  jumpSpeed: 15
-  gravity: -9.8
-  terminalVelocity: -10
-  minFall: -1.5
-  pushForce: 3
 --- !u!143 &2075692500
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2741,7 +2721,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147674561093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7767130b14db2674795cfa1968c8f936, type: 3}
   m_Name: 
@@ -2881,12 +2861,12 @@ GameObject:
   - component: {fileID: 543450651866751231}
   - component: {fileID: 5866666020168874629}
   - component: {fileID: 2075692500}
-  - component: {fileID: 2075692499}
   - component: {fileID: 2075692502}
   - component: {fileID: 2075692504}
+  - component: {fileID: 5866666020168874630}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3683,6 +3663,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666020168874630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147674561093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f42fdedf6f9b3c44824d18b2b731e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1732684548}
+  rotSpeed: 15
+  moveSpeed: 6
+  jumpSpeed: 15
+  gravity: -9.8
+  terminalVelocity: -10
+  minFall: -1.5
+  pushForce: 3
+  deceleration: 25
+  targgtBuffer: 1.5
 --- !u!4 &5879585641676136915
 Transform:
   m_ObjectHideFlags: 0

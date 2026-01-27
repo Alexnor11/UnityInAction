@@ -4,11 +4,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent (typeof(InventoryManager))]
+[RequireComponent(typeof(MissionManager))]
 
 public class Managers : MonoBehaviour
 {
     public static PlayerManager Player {  get; private set; }
     public static InventoryManager Inventory { get; private set; }
+    public static MissionManager Mission { get; private set; }
 
     private List<IGameManager> startSequence;
 
@@ -16,10 +18,12 @@ public class Managers : MonoBehaviour
     {
         Player = GetComponent<PlayerManager>();
         Inventory = GetComponent<InventoryManager>();
+        Mission = GetComponent<MissionManager>();
 
         startSequence = new List<IGameManager>();
         startSequence.Add(Player);
         startSequence.Add(Inventory);
+        startSequence.Add(Mission);
 
         StartCoroutine(StartupManager());
     }
@@ -51,8 +55,11 @@ public class Managers : MonoBehaviour
             }
             if (numReady > lastReady)
                 Debug.Log($"Progress: {numReady}/{numModules}");
+                Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS,
+                    numReady, numModules);
             yield return null;
         }
         Debug.Log("All manager started up");
+        Messenger.Broadcast(StartupEvent.MANAGERS_STARTED);
     }
 }

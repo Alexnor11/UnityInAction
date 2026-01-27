@@ -33,12 +33,20 @@ public class MissionManager : MonoBehaviour, IGameManager
         }
         else
         {
-            Debug.Log("Last level");
+            Debug.Log("Last level");           
         }
+    }
+
+    public void RestartCurrent()
+    {
+        string name = $"Level{curLevel}";
+        Debug.Log($"Loading {name}");
+        SceneManager.LoadScene(name);
     }
 
     public void ReachObjective()
     {
         Messenger.Broadcast(GameEvent.LEVEL_COMPLETE);
     }
+    
 }

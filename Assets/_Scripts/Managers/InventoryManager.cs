@@ -16,8 +16,17 @@ public class InventoryManager : MonoBehaviour, IGameManager
         Debug.Log("Inventiry manager starting...");
 
         network = service;
-        items = new Dictionary<string, int>(); 
+        UpdateData(new Dictionary<string, int>()); 
+        
         status = ManagerStatus.Started;
+    }
+    public void UpdateData(Dictionary<string, int> items)
+    {
+        this.items = items;
+    }
+    public Dictionary<string, int> GetData()
+    {
+        return items;
     }
 
     private void DisplayItems()

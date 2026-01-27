@@ -16,11 +16,16 @@ public class MissionManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Mission manager starting...");
         network = service;
-        curLevel = 0;
-        maxLevel = 1;
+        
+        UpdateData(0, 3);
 
         status = ManagerStatus.Started;
     } 
+    public void  UpdateData(int curLevel, int MaxLevel)
+    {
+        this.curLevel = curLevel;
+        this.maxLevel = MaxLevel;
+    }
 
     public void GoToNext()
     {

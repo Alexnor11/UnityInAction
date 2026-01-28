@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +7,7 @@ public class StartupController : MonoBehaviour
 
     private void OnEnable()
     {
-        Messenger<int, int>.AddListener(StartupEvent.MANAGERS_PROGRESS,OnManagersProgress);
+        Messenger<int, int>.AddListener(StartupEvent.MANAGERS_PROGRESS, OnManagersProgress);
         Messenger.AddListener(StartupEvent.MANAGERS_STARTED, OnManagersStarted);
     }
     private void OnDisable()
